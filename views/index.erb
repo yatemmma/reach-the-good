@@ -1,0 +1,20 @@
+<html>
+<head>
+</head>
+<body onload="focus();">
+
+「<%= bad_word %>」を避けて「<%= good_word %>」へたどり着くゲーム！
+
+<form name="form" action="/search" method="post">
+  <input type="text" name="keywords[]" size="50" placeholder="キーワードを入力してください。(例：漫画家)" />
+  <input type="submit" value="Go!" />
+</form>
+
+Data engine is <a href="http://ja.dbpedia.org/" target="_blank">DBPedia Japanese</a>.
+<script>
+  function focus() {
+    document.form['keywords[]'].focus();
+  }
+</script>
+</body>
+</html>
