@@ -12,7 +12,7 @@ $ bundle exec rackup
 
 ## Sample
 
-TBD
+https://reach-the-tottori.herokuapp.com/
 
 ## Data engine
 
