@@ -65,7 +65,7 @@ def dbpedia(keyword)
       link['value'].gsub('http://ja.dbpedia.org/resource/', '')
     end
     links.delete_if do |text|
-      ['Category:', '特別:'].any? {|prefix| text.start_with? prefix}
+      ['Category:', '特別:', 'En:', 'ファイル:'].any? {|prefix| text.start_with? prefix}
     end
   else
     []
