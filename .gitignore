@@ -1,2 +1,5 @@
-.bundle/
-vendor/
+/Packages/
+/.build/
+
+.DS_Store
+memo.txt
