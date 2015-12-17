@@ -1,8 +1,8 @@
 import PackageDescription
 
 let package = Package(
-    name: "reach-the-good",
-    dependencies: [
-        .Package(url: "https://github.com/takebayashi/swiftra.git", majorVersion: 0)
-    ]
+  name: "reach-the-tottori",
+  dependencies: [
+    .Package(url: "https://github.com/kylef/Curassow.git", majorVersion: 0, minor: 2),
+  ]
 )
