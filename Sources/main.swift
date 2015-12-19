@@ -6,14 +6,12 @@ import Curassow
 import Foundation
 import Mustache
 
+func genResponse(body: String) -> Response {
+  // バイト数 - 文字数 を足す？
+  return Response(.Ok, contentType: "text/html; charset=UTF-8", body: body)
+}
+
 serve { request in
-  print("--------")
-  print(request.method)
-  print(request.path)
-  print(request.headers)
-  print(request.body)
-  
-  
   if request.method == "GET" && request.path == "/" {
   
     let path = NSFileManager.defaultManager().currentDirectoryPath
@@ -24,13 +22,9 @@ serve { request in
       "badWord": "島根県"
     ]
     
-    do {
-      let rendering = try template.render(Box(data))
-      print(rendering)
-      return Response(.Ok, contentType: "text/html; charset=UTF-8", body: rendering)
-    } catch let error as NSError {
-      print("something was wrong: \(error)")
-    }
+    let rendering = try! template.render(Box(data))
+    print(rendering)
+    return genResponse(rendering)
   }
   
   if request.method == "POST" && request.path == "/search" {
@@ -46,16 +40,10 @@ serve { request in
       "badWord": "島根県"
     ]
     
-    do {
-      let rendering = try template.render(Box(data))
-      print(rendering)
-      return Response(.Ok, contentType: "text/html; charset=UTF-8", body: rendering)
-    } catch let error as NSError {
-      print("something was wrong: \(error)")
-    }
-    
-    return Response(.Ok, contentType: "text/html; charset=UTF-8", body: "Hello World")
+    let rendering = try! template.render(Box(data))
+    print(rendering)
+    return genResponse(rendering)
   }
   
-  return Response(.Ok, contentType: "text/html; charset=UTF-8", body: "なんじゃいこりゃ！長芋まんじゅうだがな              ")
+  return genResponse("なんじゃいこりゃ！長芋まんじゅうだがな")
 }
