@@ -1,0 +1,63 @@
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>reach-the-good</title>
+  <style>
+    a { color: black;}
+    .found a { color: red;}
+    li {display: inline;}
+  </style>
+</head>
+
+<body onload="result('{{status}}');">
+<div>
+  <a href="/">TOP</a>
+  {{#keywords}}
+    ＞ <span>{{.}}</span>
+  {{/keywords}}
+  
+  {{#status}}
+    <span>[Result:{{status}}]</span>
+  {{/status}}
+</div>
+
+<ul>
+  {{#items}}
+    <li><a href="javascript:clickItem('{{.}}');">{{.}}</a></li>
+  {{/items}}
+</ul>
+
+<form name="form" action="/search" method="post">
+  {{#keywords}}
+    <input type=hidden name="keywords[]" value="{{.}}" />
+  {{/keywords}}
+</form>
+
+<script>
+function clickItem(keyword) {
+  var element = document.createElement('input');
+  element.name = "keywords[]";
+  element.type = "hidden";
+  element.value = keyword;
+  document.form.appendChild(element);
+  document.form.submit();
+}
+function result(status) {
+  var words = ["{{goodWord}}", "{{badWord}}"];
+  var list = Array.prototype.slice.call(document.querySelectorAll("ul li a"));
+  list.forEach(function(item) {
+    if (words.includes(item.innerText)) {
+      item.style.color = "red";
+    }
+  });
+  if (status !== 'none') {
+    alert(status);
+  }
+}
+</script>
+</body>
+</html>
+<!-- 
+  uwaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+-->

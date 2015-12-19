@@ -20,8 +20,8 @@ serve { request in
     let template = try! Template(path: "\(path)/Sources/index.mustache")
 
     let data = [
-      "goodWord": "鳥取",
-      "badWord": "島根"
+      "goodWord": "鳥取県",
+      "badWord": "島根県"
     ]
     
     do {
@@ -34,6 +34,26 @@ serve { request in
   }
   
   if request.method == "POST" && request.path == "/search" {
+  
+    let path = NSFileManager.defaultManager().currentDirectoryPath
+    let template = try! Template(path: "\(path)/Sources/result.mustache")
+
+    let data = [
+      "keywords": ["aaa", "vvv", "ccc"],
+      "items": ["aaaaaa", "鳥取県", "eeeee", "sssss"],
+      "status": "even",
+      "goodWord": "鳥取県",
+      "badWord": "島根県"
+    ]
+    
+    do {
+      let rendering = try template.render(Box(data))
+      print(rendering)
+      return Response(.Ok, contentType: "text/html; charset=UTF-8", body: rendering)
+    } catch let error as NSError {
+      print("something was wrong: \(error)")
+    }
+    
     return Response(.Ok, contentType: "text/html; charset=UTF-8", body: "Hello World")
   }
   
